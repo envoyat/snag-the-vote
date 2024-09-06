@@ -9,6 +9,6 @@ How can we help more people to understand their democracy, have an opportunity t
 
 ## Useful Links
 
-Miro Flowchart: [Snag the Vote](https://miro.com/app/board/uXjVKiUvmvw=/)
+Miro Flowchart: [Snag the Vote](https://miro.com/app/board/uXjVKiUvmvw=/){:target="_blank"}
 
-Sample Map: [Proof of Concept](https://www.arcgis.com/apps/mapviewer/index.html?webmap=88d2b75f8cd24ec0bbfc0d75c906e83b)
+Sample Map: [Proof of Concept](https://www.arcgis.com/apps/mapviewer/index.html?webmap=88d2b75f8cd24ec0bbfc0d75c906e83b){:target="_blank"}
