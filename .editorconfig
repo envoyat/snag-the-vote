@@ -18,6 +18,9 @@ tab_width = 2
 indent_size = 2
 tab_width = 2
 
+[*.svelte]
+indent_size = 2
+
 [{tsconfig.json,.babelrc,.eslintrc,.prettierrc,.stylelintrc,.ws-context,jest.config}]
 indent_size = 2
 tab_width = 2
