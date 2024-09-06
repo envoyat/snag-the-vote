@@ -32,3 +32,7 @@ Elections bring all of Australia together for voting. How can we encourage peopl
 - Uploding of photos for social engagement
   - Photo
   - Text with some hash tags
+ - Can view election results for selected location as they come in via AEC data.
+ - Can view voting results of sausage ratings as they come in via app.
+
+  
