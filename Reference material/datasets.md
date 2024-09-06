@@ -9,3 +9,4 @@ Potential useful datasets:
 |Members elected (house of reps)|AEC|https://results.aec.gov.au/27966/Website/Downloads/HouseMembersElectedDownload-27966.csv|
 |National list of candidates (senate)|AEC|https://results.aec.gov.au/27966/Website/Downloads/SenateCandidatesDownload-27966.csv|
 |Senators elected|AEC|https://results.aec.gov.au/27966/Website/Downloads/SenateSenatorsElectedDownload-27966.csv|
+|Media feed archive|AEC|ftp://mediafeedarchive.aec.gov.au/27966|
