@@ -36,4 +36,14 @@ Elections bring all of Australia together for voting. How can we encourage peopl
  - Can view election results for selected location as they come in via AEC data.
  - Can view voting results of sausage ratings as they come in via app.
 
+## Addons and Ver 2.0
+
+Encourage continued engagement by showing AEC counting results.
+
+Allow people to register their sausage sizzle (e.g. Bunnings, RSL, Sports Event) nearby voting stations.
+
+Can extend the map overlays to include information about selected location
+- School Data
+- Council Data
+- Nearby parking/charging stations, etc..
   
