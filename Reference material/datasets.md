@@ -7,6 +7,7 @@ Potential useful datasets:
 |Turnout by division|AEC|https://results.aec.gov.au/27966/Website/Downloads/HouseTurnoutByDivisionDownload-27966.csv|
 |National list of candidates (house of reps)|AEC|https://results.aec.gov.au/27966/Website/Downloads/HouseCandidatesDownload-27966.csv|
 |Members elected (house of reps)|AEC|https://results.aec.gov.au/27966/Website/Downloads/HouseMembersElectedDownload-27966.csv|
+|Members (house of reps)|Parliament of Australia|https://www.aph.gov.au/-/media/03_Senators_and_Members/Address_Labels_and_CSV_files/FamilynameRepsCSV.csv?la=en&hash=491780AED283A7A1CF1E2CBE3FED564C5DA77CBF|
 |National list of candidates (senate)|AEC|https://results.aec.gov.au/27966/Website/Downloads/SenateCandidatesDownload-27966.csv|
 |Senators elected|AEC|https://results.aec.gov.au/27966/Website/Downloads/SenateSenatorsElectedDownload-27966.csv|
 |Media feed archive|AEC|ftp://mediafeedarchive.aec.gov.au/27966|
