@@ -42,10 +42,17 @@
       }
     };
   }
+
+  $effect(() => {
+    const mapDiv = document.getElementById('map-div');
+    if (mapDiv) {
+      createMap(mapDiv as HTMLDivElement);
+    }
+  })
 </script>
 
 <div class="h-screen">
-  <div id="viewDiv" use:createMap></div>
+  <div id="map-div"></div>
 </div>
 
 <Modal
@@ -57,7 +64,7 @@
 </Modal>
 
 <style>
-  #viewDiv {
+  #map-div {
     width: 100%;
     height: 90%;
   }
