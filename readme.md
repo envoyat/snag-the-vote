@@ -10,7 +10,9 @@ How can we help more people to understand their democracy, have an opportunity t
 ## Useful Links
 
 Miro Flowchart: [Snag the Vote](https://miro.com/app/board/uXjVKiUvmvw=/)
+
 Sample Map: [Proof of Concept](https://www.arcgis.com/apps/mapviewer/index.html?webmap=88d2b75f8cd24ec0bbfc0d75c906e83b)
+
 Figma: [Figma Prototype](https://www.figma.com/design/42WmusXtYnpCz5weNTX8Vz/Snag-the-vote?node-id=6-460&t=uSeS9UIOonIzDPgx-1)
 
 ## Key Features/Stories
