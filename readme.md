@@ -24,6 +24,7 @@ Elections bring all of Australia together for voting. How can we encourage peopl
 - Information on local members. Links to local members site for more information.
 - Information on locations current member/party affiliation.
 - Information on members on the ballot. Links to more details on external site.
+  - Candidate summary is randomised to avoid any preference in displaying data (RNG).
 - Data pulled from AEC shows non-biased data on selected location.
 - Can vote for sausage by emojis. Scale 1 - 3.
 - Voting options allow for what was on the sausage
