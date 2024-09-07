@@ -10,3 +10,4 @@ Potential useful datasets:
 |National list of candidates (senate)|AEC|https://results.aec.gov.au/27966/Website/Downloads/SenateCandidatesDownload-27966.csv|
 |Senators elected|AEC|https://results.aec.gov.au/27966/Website/Downloads/SenateSenatorsElectedDownload-27966.csv|
 |Media feed archive|AEC|ftp://mediafeedarchive.aec.gov.au/27966|
+|Active Members Mailing List|Parliament of Australia|https://www.aph.gov.au/-/media/03_Senators_and_Members/Address_Labels_and_CSV_files/FamilynameRepsCSV.csv|
