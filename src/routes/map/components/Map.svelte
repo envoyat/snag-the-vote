@@ -44,8 +44,8 @@
   }
 </script>
 
-<div class="h-full">
-  <div id="map-div" use:createMap></div>
+<div class="flex flex-col h-full">
+  <div class="flex-grow" use:createMap></div>
 </div>
 
 <Modal
@@ -57,8 +57,5 @@
 </Modal>
 
 <style>
-  #map-div {
-    width: 100%;
-    height: 90%;
-  }
+
 </style>

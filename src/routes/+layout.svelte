@@ -4,13 +4,15 @@
     import Navbar from '$lib/components/UI/Navbar.svelte';
 </script>
 
-<Navbar />
+<div class="flex flex-col min-h-screen max-h-screen h-screen overflow-auto">
+  <Navbar />
 
-<main class="">
-  <slot></slot>
-</main>
+  <main class="flex-grow pb-12">
+    <slot></slot>
+  </main>
 
-<BottomNav />
+  <BottomNav />
+</div>
 
 <style>
 

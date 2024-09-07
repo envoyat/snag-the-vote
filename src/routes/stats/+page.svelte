@@ -3,7 +3,7 @@
 </script>
 
 <div class="flex justify-center items-center mt-8">
-  <div class="stats shadow">
+  <div class="shadow join join-vertical md:join-horizontal">
     <div class="stat">
       <div class="stat-figure text-primary">
         <svg
