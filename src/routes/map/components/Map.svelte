@@ -4,6 +4,7 @@
   import MapView from '@arcgis/core/views/MapView';
   import WebMap from '@arcgis/core/WebMap';
   import LocationInfo from './LocationInfo.svelte';
+  import type { SelectionAttributes } from '../../../types/attributes';
 
   const WEBMAP_ID = '88d2b75f8cd24ec0bbfc0d75c906e83b';
 
@@ -11,7 +12,7 @@
   const openModal = () => isModalOpen = true;
   const closeModal = () => isModalOpen = false;
 
-  let selectedAttributes: Record<string, string> = $state({});
+  let selectedAttributes: SelectionAttributes = $state({}) as SelectionAttributes;
 
   function createMap(node: HTMLDivElement) {
     const webMap = new WebMap({
@@ -48,11 +49,7 @@
   <div class="flex-grow" use:createMap></div>
 </div>
 
-<Modal
-  title={selectedAttributes?.DivisionNm || 'Info'}
-  isOpen={isModalOpen}
-  onClose={closeModal}
->
+<Modal isOpen={isModalOpen} onClose={closeModal}>
   <LocationInfo attributes={selectedAttributes} />
 </Modal>
 

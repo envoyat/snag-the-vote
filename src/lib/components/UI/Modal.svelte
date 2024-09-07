@@ -3,7 +3,7 @@
 
   interface Props {
     children: Snippet;
-    title: string;
+    title?: string;
     isOpen: boolean;
     onClose: () => void;
   }
@@ -14,7 +14,9 @@
 
 <dialog id="the-modal" class="modal" class:modal-open={isOpen}>
   <div class="modal-box">
-    <h3 class="text-lg font-bold">{title}</h3>
+    {#if title}
+      <h3 class="text-lg font-bold">{title}</h3>
+    {/if}
 
     {@render children()}
 
