@@ -42,17 +42,10 @@
       }
     };
   }
-
-  $effect(() => {
-    const mapDiv = document.getElementById('map-div');
-    if (mapDiv) {
-      createMap(mapDiv as HTMLDivElement);
-    }
-  })
 </script>
 
-<div class="h-screen">
-  <div id="map-div"></div>
+<div class="h-full">
+  <div id="map-div" use:createMap></div>
 </div>
 
 <Modal
