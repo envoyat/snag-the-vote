@@ -1,11 +1,16 @@
 <script>
     import '../app.css';
-    import Navbar from '../components/Navbar.svelte';
+    import BottomNav from '$lib/components/UI/BottomNav.svelte';
+    import Navbar from '$lib/components/UI/Navbar.svelte';
 </script>
 
 <Navbar />
 
-<slot></slot>
+<main class="">
+  <slot></slot>
+</main>
+
+<BottomNav />
 
 <style>
 
