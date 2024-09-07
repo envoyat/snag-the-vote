@@ -24,8 +24,6 @@ export const getDivisionDataByName = async (name: string, fetch: RequestEvent['f
   const allDivisionData = await getDivisionData(fetch);
   const division = allDivisionData.find((d) => d.name == name);
 
-  console.log('found division', division);
-
   const allMembersData = await getMemberData(fetch);
   const member = allMembersData.find((m) => m.divisionName == name);
 
@@ -103,23 +101,8 @@ type CSVDivision = {
 };
 
 const getDivisionData = async (fetch: RequestEvent['fetch']): Promise<Array<Divsion>> => {
-  const headers = [
-    'objectid',
-    'elect_div',
-    'area_sqkm',
-    'sortname',
-    'globalid',
-    'e_div_numb',
-    'numccds',
-    'actual',
-    'projected',
-    'total_popu',
-    'australian',
-    'Shape__Area',
-    'Shape__Length',
-  ];
   const fileName = 'Federal_Electoral_Boundaries.csv';
-  const csvData = await loadCSVData<CSVDivision>(fileName, headers, fetch);
+  const csvData = await loadCSVData<CSVDivision>(fileName, fetch);
   return csvData.map(
     (d) =>
       ({
@@ -147,25 +130,8 @@ type CSVPollingPlace = {
 };
 
 const getPollingPlacesData = async (fetch: RequestEvent['fetch']): Promise<Array<PollingPlace>> => {
-  const headers = [
-    'State',
-    'DivisionID',
-    'DivisionNm',
-    'PollingPlaceID',
-    'PollingPlaceTypeID',
-    'PollingPlaceNm',
-    'PremisesNm',
-    'PremisesAddress1',
-    'PremisesAddress2',
-    'PremisesAddress3',
-    'PremisesSuburb',
-    'PremisesStateAb',
-    'PremisesPostCode',
-    'Latitude',
-    'Longitude',
-  ];
   const fileName = 'GeneralPollingPlacesDownload-27966.csv';
-  const csvData = await loadCSVData<CSVPollingPlace>(fileName, headers, fetch);
+  const csvData = await loadCSVData<CSVPollingPlace>(fileName, fetch);
   return csvData.map(
     (d) =>
       ({
@@ -195,20 +161,8 @@ type CSVCandidate = {
 };
 
 const getCandidateData = async (fetch: RequestEvent['fetch']): Promise<Array<Candidate>> => {
-  const headers = [
-    'StateAb',
-    'DivisionID',
-    'DivisionNm',
-    'PartyAb',
-    'PartyNm',
-    'CandidateID',
-    'Surname',
-    'GivenNm',
-    'Elected',
-    'HistoricElected',
-  ];
   const fileName = 'HouseCandidatesDownload-27966.csv';
-  const csvData = await loadCSVData<CSVCandidate>(fileName, headers, fetch);
+  const csvData = await loadCSVData<CSVCandidate>(fileName, fetch);
   return csvData.map(
     (d) =>
       ({
@@ -255,41 +209,8 @@ type CSVMember = {
 };
 
 const getMemberData = async (fetch: RequestEvent['fetch']): Promise<Array<Member>> => {
-  const headers = [
-    'Honorific',
-    'Salutation',
-    'Post Nominals',
-    'Surname',
-    'First Name',
-    'Other Name',
-    'Preferred Name',
-    'Initials',
-    'Electorate',
-    'State',
-    'Political Party',
-    'Gender',
-    'Telephone',
-    'Electorate Address Line 1',
-    'Electorate Address Line 2',
-    'Electorate Suburb',
-    'Electorate State',
-    'Electorate PostCode',
-    'Electorate Telephone',
-    'Electorate Fax',
-    'Electorate TollFree',
-    'Electorate Postal Address',
-    'Electorate Postal Suburb',
-    'Electorate Postal State',
-    'Electorate Postal Postcode',
-    'Label Address',
-    'Label Suburb',
-    'Label State',
-    'Label Postcode',
-    'Parliamentary Title',
-    'Ministerial Title',
-  ];
   const fileName = 'FamilynameRepsCSV.csv';
-  const csvData = await loadCSVData<CSVMember>(fileName, headers, fetch);
+  const csvData = await loadCSVData<CSVMember>(fileName, fetch);
   return csvData.map(
     (d) =>
       ({
@@ -308,7 +229,6 @@ const getMemberData = async (fetch: RequestEvent['fetch']): Promise<Array<Member
 
 const loadCSVData = async <T>(
   fileName: string,
-  headers: Array<string>,
   fetch: RequestEvent['fetch'],
 ): Promise<Array<T>> => {
   const csvData = await fetch('/' + fileName);
