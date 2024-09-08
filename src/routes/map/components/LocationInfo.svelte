@@ -21,6 +21,7 @@
       </ul>
     {:else}
       <h1 class="text-xl font-bold">{item.pollingPlace.locationName}</h1>
+      <div class="italic">{item.division.name}</div>
       <h3 class="">{item.pollingPlace.address1}, {item.pollingPlace.suburb} {item.pollingPlace.postCode}</h3>
 
       <div>SNAGS: {item.pollingPlace.snagData ? (item.pollingPlace.snagData.votePercent * 100) : 0}%</div>
