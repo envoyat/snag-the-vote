@@ -54,12 +54,12 @@
     apiData = null;
 
     if (isElectoralDivision(selectedAttributes)) {
-      const divisionDataRequest = await fetch(`/api/divisions?divisionName=${selectedAttributes.elect_div}`);
+      const divisionDataRequest = await fetch(`/data/divisions?divisionName=${selectedAttributes.elect_div}`);
       const divisionDataText = await divisionDataRequest.text();
       const divisionData = JSON.parse(divisionDataText) as DivsionWithMemberAndCandidates;
       apiData = divisionData;
     } else {
-      const pollingPlaceDataRequest = await fetch(`/api/polling-places?pollingPlaceId=${selectedAttributes.PollingPlaceID}`);
+      const pollingPlaceDataRequest = await fetch(`/data/polling-places?pollingPlaceId=${selectedAttributes.PollingPlaceID}`);
       const pollingPlaceDataText = await pollingPlaceDataRequest.text();
       const pollingPlaceData = JSON.parse(pollingPlaceDataText) as DivisonAndPollingPlaceData;
       apiData = pollingPlaceData;
