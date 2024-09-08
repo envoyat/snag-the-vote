@@ -13,7 +13,7 @@
 </script>
 
 <dialog id="the-modal" class="modal" class:modal-open={isOpen}>
-  <div class="modal-box">
+  <div class="modal-box max-w-full mx-4 my-6 overflow-hidden">
     {#if title}
       <h3 class="text-lg font-bold">{title}</h3>
     {/if}

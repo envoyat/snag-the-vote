@@ -1,6 +1,13 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { parse } from 'csv-parse/sync';
-import type { Candidate, Divsion, DivsionWithMemberAndCandidates, Member, PollingPlace, PollingPlaceWithSnagData } from '../types/apiData';
+import type {
+  Candidate,
+  Divsion,
+  DivisionWithMemberAndCandidates,
+  Member,
+  PollingPlace,
+  PollingPlaceWithSnagData,
+} from '../types/apiData';
 
 export const getPollingPlaceData = async (id: number, fetch: RequestEvent['fetch']) => {
   const allPollingPlaceData = await getPollingPlacesData(fetch);
@@ -35,7 +42,7 @@ export const getDivisionDataByName = async (name: string, fetch: RequestEvent['f
     ...division,
     currentMember: member,
     candidates,
-  } as DivsionWithMemberAndCandidates;
+  } as DivisionWithMemberAndCandidates;
 };
 
 type CSVDivision = {

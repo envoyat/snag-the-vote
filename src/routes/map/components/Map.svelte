@@ -77,17 +77,18 @@
 
 <div class="flex flex-col h-full">
   <div class="flex-grow" use:createMap></div>
-  {#if apiData && isModalOpen}
-    <CandidateCarousel data={isAPIDivision(apiData) ? apiData : apiData.division} />
-  {/if}
 </div>
 
 <Modal isOpen={isModalOpen} onClose={closeModal}>
   {#if selected}
     {#if isLoadingApiData}
-      <span class="loading ball loading-lg"></span>
+      <span class="loading ball loading-lg mx-auto"></span>
     {:else}
       <LocationInfo attributes={apiData} />
+
+      {#if apiData && isModalOpen}
+        <CandidateCarousel data={isAPIDivision(apiData) ? apiData : apiData.division} />
+      {/if}
     {/if}
   {/if}
 </Modal>
