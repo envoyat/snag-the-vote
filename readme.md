@@ -7,15 +7,23 @@ Challenge: [Civic participation for a more resilient, cohesive democracy.](https
 
 How can we help more people to understand their democracy, have an opportunity to participate in civic life, contribute to their community, and/or feel a sense of belonging and responsibility?
 
+Want to see it in action? [Go to the proof-of-concept site](https://gentle-mud-04beaf81e.5.azurestaticapps.net/)
+
+Or just clone and run it yourself:
+```
+npm i
+npm run dev
+```
+
 ## Useful Links
 
-Miro Flowchart: [Snag the Vote](https://miro.com/app/board/uXjVKiUvmvw=/)
+Flowchart: [Miro](https://miro.com/app/board/uXjVKiUvmvw=/)
 
-Sample Map: [Proof of Concept](https://www.arcgis.com/apps/mapviewer/index.html?webmap=88d2b75f8cd24ec0bbfc0d75c906e83b)
+Sample Map: [ArcGIS map with data](https://www.arcgis.com/apps/mapviewer/index.html?webmap=88d2b75f8cd24ec0bbfc0d75c906e83b)
 
-Figma: [Figma Wireframes](https://www.figma.com/design/QUqihcQSiFGABeAdUZdCGm/Snag-the-vote?node-id=44-768&node-type=CANVAS&t=wWOyvdlekEjFZlcG-0)
+Overview: [Figma Wireframes](https://www.figma.com/design/QUqihcQSiFGABeAdUZdCGm/Snag-the-vote?node-id=44-768&node-type=CANVAS&t=wWOyvdlekEjFZlcG-0)
 
-Figma: [Figma Prototype](https://www.figma.com/proto/QUqihcQSiFGABeAdUZdCGm/Snag-the-vote?page-id=44%3A768&node-id=185-5625&node-type=CANVAS&viewport=629%2C432%2C0.05&t=3gjrLZtCQJ3Mm9M9-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=185%3A5625&show-proto-sidebar=1)
+Interactive design: [Figma Prototype](https://www.figma.com/proto/QUqihcQSiFGABeAdUZdCGm/Snag-the-vote?page-id=44%3A768&node-id=185-5625&node-type=CANVAS&viewport=629%2C432%2C0.05&t=3gjrLZtCQJ3Mm9M9-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=185%3A5625&show-proto-sidebar=1)
 
 ## Key Features/Stories
 
