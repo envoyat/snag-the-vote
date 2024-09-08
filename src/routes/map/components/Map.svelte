@@ -3,20 +3,25 @@
   import Modal from '$lib/components/UI/Modal.svelte';
   import MapView from '@arcgis/core/views/MapView';
   import WebMap from '@arcgis/core/WebMap';
-  import LocationInfo from './LocationInfo.svelte';
+  import {
+    type APIDataItem,
+    type DivisionAndPollingPlaceData,
+    type DivisionWithMemberAndCandidates,
+    isAPIDivision,
+  } from '../../../types/apiData';
   import { isElectoralDivision, type SelectionAttributes } from '../../../types/attributes';
-  import type { APIDataItem, DivisonAndPollingPlaceData, DivsionWithMemberAndCandidates } from '../../../types/apiData';
+  import CandidateCarousel from './CandidateCarousel.svelte';
+  import LocationInfo from './LocationInfo.svelte';
 
   const WEBMAP_ID = '88d2b75f8cd24ec0bbfc0d75c906e83b';
 
+  let selected: SelectionAttributes | null = $state(null);
+  let apiData: APIDataItem | null = $state(null);
+  let isLoadingApiData = $state(false);
   let isModalOpen = $state(false);
+
   const openModal = () => isModalOpen = true;
   const closeModal = () => isModalOpen = false;
-
-  let selectedAttributes: SelectionAttributes = $state({}) as SelectionAttributes;
-
-  let isLoadingApiData = $state(false);
-  let apiData: APIDataItem | null = $state(null) as APIDataItem | null;
 
   function createMap(node: HTMLDivElement) {
     const webMap = new WebMap({
@@ -36,7 +41,8 @@
         console.log('mapPoint', event.mapPoint);
 
         const graphic = results.find(result => result.type === 'graphic');
-        selectedAttributes = graphic?.graphic.attributes;
+        selected = graphic?.graphic.attributes;
+
         await loadLocationDataAndOpenModal();
       }
     });
@@ -49,21 +55,20 @@
   }
 
   const loadLocationDataAndOpenModal = async () => {
+    if (!selected) {
+      return;
+    }
     isLoadingApiData = true;
     apiData = null;
 
     openModal();
 
-    if (isElectoralDivision(selectedAttributes)) {
-      const divisionDataRequest = await fetch(`/data/divisions?divisionName=${selectedAttributes.elect_div}`);
-      const divisionDataText = await divisionDataRequest.text();
-      const divisionData = JSON.parse(divisionDataText) as DivsionWithMemberAndCandidates;
-      apiData = divisionData;
+    if (isElectoralDivision(selected)) {
+      const divisionDataRequest = await fetch(`/data/divisions?divisionName=${selected.elect_div}`);
+      apiData = await divisionDataRequest.json() as DivisionWithMemberAndCandidates;
     } else {
-      const pollingPlaceDataRequest = await fetch(`/data/polling-places?pollingPlaceId=${selectedAttributes.PollingPlaceID}`);
-      const pollingPlaceDataText = await pollingPlaceDataRequest.text();
-      const pollingPlaceData = JSON.parse(pollingPlaceDataText) as DivisonAndPollingPlaceData;
-      apiData = pollingPlaceData;
+      const pollingPlaceDataRequest = await fetch(`/data/polling-places?pollingPlaceId=${selected.PollingPlaceID}`);
+      apiData = await pollingPlaceDataRequest.json() as DivisionAndPollingPlaceData;
     }
 
     isLoadingApiData = false;
@@ -72,13 +77,18 @@
 
 <div class="flex flex-col h-full">
   <div class="flex-grow" use:createMap></div>
+  {#if apiData && isModalOpen}
+    <CandidateCarousel data={isAPIDivision(apiData) ? apiData : apiData.division} />
+  {/if}
 </div>
 
 <Modal isOpen={isModalOpen} onClose={closeModal}>
-  {#if isLoadingApiData}
-    <p>Loading...</p>
-  {:else}
-    <LocationInfo attributes={apiData} />
+  {#if selected}
+    {#if isLoadingApiData}
+      <span class="loading ball loading-lg"></span>
+    {:else}
+      <LocationInfo attributes={apiData} />
+    {/if}
   {/if}
 </Modal>
 
