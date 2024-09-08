@@ -4,7 +4,8 @@
   import MapView from '@arcgis/core/views/MapView';
   import WebMap from '@arcgis/core/WebMap';
   import LocationInfo from './LocationInfo.svelte';
-  import type { SelectionAttributes } from '../../../types/attributes';
+  import { isElectoralDivision, type SelectionAttributes } from '../../../types/attributes';
+  import type { APIDataItem, DivisonAndPollingPlaceData, DivsionWithMemberAndCandidates } from '../../../types/apiData';
 
   const WEBMAP_ID = '88d2b75f8cd24ec0bbfc0d75c906e83b';
 
@@ -13,6 +14,9 @@
   const closeModal = () => isModalOpen = false;
 
   let selectedAttributes: SelectionAttributes = $state({}) as SelectionAttributes;
+
+  let isLoadingApiData = $state(false);
+  let apiData: APIDataItem | null = $state(null) as APIDataItem | null;
 
   function createMap(node: HTMLDivElement) {
     const webMap = new WebMap({
@@ -33,6 +37,7 @@
 
         const graphic = results.find(result => result.type === 'graphic');
         selectedAttributes = graphic?.graphic.attributes;
+        await loadLocationData();
         openModal();
       }
     });
@@ -43,6 +48,25 @@
       }
     };
   }
+
+  const loadLocationData = async () => {
+    isLoadingApiData = true;
+    apiData = null;
+
+    if (isElectoralDivision(selectedAttributes)) {
+      const divisionDataRequest = await fetch(`/api/divisions?divisionName=${selectedAttributes.elect_div}`);
+      const divisionDataText = await divisionDataRequest.text();
+      const divisionData = JSON.parse(divisionDataText) as DivsionWithMemberAndCandidates;
+      apiData = divisionData;
+    } else {
+      const pollingPlaceDataRequest = await fetch(`/api/polling-places?pollingPlaceId=${selectedAttributes.PollingPlaceID}`);
+      const pollingPlaceDataText = await pollingPlaceDataRequest.text();
+      const pollingPlaceData = JSON.parse(pollingPlaceDataText) as DivisonAndPollingPlaceData;
+      apiData = pollingPlaceData;
+    }
+
+    isLoadingApiData = false;
+  }
 </script>
 
 <div class="flex flex-col h-full">
@@ -50,7 +74,11 @@
 </div>
 
 <Modal isOpen={isModalOpen} onClose={closeModal}>
-  <LocationInfo attributes={selectedAttributes} />
+  {#if isLoadingApiData}
+    <p>Loading...</p>
+  {:else}
+    <LocationInfo attributes={apiData} />
+  {/if}
 </Modal>
 
 <style>

@@ -45,10 +45,15 @@ export type Divsion = {
     };
   };
   
-  export type APIDataItem = DivsionWithMemberAndCandidates | PollingPlaceWithSnagData;
+  export type DivisonAndPollingPlaceData = {
+    division: DivsionWithMemberAndCandidates;
+    pollingPlace: PollingPlaceWithSnagData;
+  };
+  
+  export type APIDataItem = DivsionWithMemberAndCandidates | DivisonAndPollingPlaceData;
   
   export const isAPIDivision = (attr: APIDataItem): attr is DivsionWithMemberAndCandidates =>
     'currentMember' in attr;
   
-  export const isAPIPollingPlace = (attr: APIDataItem): attr is PollingPlaceWithSnagData =>
-    'snagData' in attr;
+  export const isAPIPollingPlace = (attr: APIDataItem): attr is DivisonAndPollingPlaceData =>
+    'division' in attr;

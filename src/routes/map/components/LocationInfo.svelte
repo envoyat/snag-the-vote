@@ -1,52 +1,36 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { isElectoralDivision, type SelectionAttributes } from '../../../types/attributes';
-  import { isAPIDivision, type APIDataItem, type DivsionWithMemberAndCandidates, type PollingPlaceWithSnagData } from '../../../types/apiData';
+  import { isAPIDivision, type APIDataItem } from '../../../types/apiData';
 
   interface Props {
-    attributes: SelectionAttributes
+    attributes: APIDataItem | null
   }
 
   let { attributes: item }: Props = $props();
-
-  let isLoadingApiData = $state(false);
-  let apiData: APIDataItem = $state({}) as APIDataItem;
-
-  onMount(async () => {
-    isLoadingApiData = true;
-
-    if (item) {
-      if (isElectoralDivision(item)) {
-        const divisionDataRequest = await fetch(`/api/divisions?divisionName=${item.elect_div}`);
-        const divisionDataText = await divisionDataRequest.text();
-        const divisionData = JSON.parse(divisionDataText) as DivsionWithMemberAndCandidates;
-        console.log('divisionData', divisionData);
-        apiData = divisionData;
-      } else {
-        const pollingPlaceDataRequest = await fetch(`/api/polling-places?pollingPlaceId=${item.PollingPlaceID}`);
-        const pollingPlaceDataText = await pollingPlaceDataRequest.text();
-        const pollingPlaceData = JSON.parse(pollingPlaceDataText) as PollingPlaceWithSnagData;
-        console.log('polingPlaceData', pollingPlaceData);
-        apiData = pollingPlaceData;
-      }
-    }
-
-    isLoadingApiData = false;
-  });
 </script>
 
 <div class="p-4">
-  {#if isLoadingApiData}
-    <p>Loading...</p>
-  {:else}
-    {#if isAPIDivision(apiData)}
-      <h1 class="text-xl font-bold">{apiData.name}</h1>
-      <p>{apiData.currentMember.party}</p>
+  {#if item}
+    {#if isAPIDivision(item)}
+      <h1 class="text-xl font-bold">{item.name}</h1>
+      <div>{item.currentMember.givenName} {item.currentMember.surname} ({item.currentMember.party})</div>
+      <h2 class="text-l font-bold mt-2">Candidates</h2>
+      <ul class="list-inside list-disc">
+        {#each item.candidates as candidate}
+          <li>{candidate.surname}, {candidate.givenName}: {candidate.party}</li>
+        {/each}
+      </ul>
     {:else}
-      <h1 class="text-xl font-bold">{apiData.name}</h1>
-      <h3 class="">{apiData.address1}, {apiData.suburb} {apiData.postCode}</h3>
+      <h1 class="text-xl font-bold">{item.pollingPlace.locationName}</h1>
+      <h3 class="">{item.pollingPlace.address1}, {item.pollingPlace.suburb} {item.pollingPlace.postCode}</h3>
 
-      <h1>SNAGS: {apiData.snagData && apiData.snagData.votePercent}%</h1>
+      <div>SNAGS: {item.pollingPlace.snagData ? (item.pollingPlace.snagData.votePercent * 100) : 0}%</div>
+
+      <h2 class="text-l font-bold mt-2">Candidates</h2>
+      <ul class="list-inside list-disc">
+        {#each item.division.candidates as candidate}
+          <li>{candidate.surname}, {candidate.givenName}: {candidate.party}</li>
+        {/each}
+      </ul>
     {/if}
   {/if}
 </div>
