@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { isAPIDivision, type APIDataItem, type DivsionWithMemberAndCandidates, type PollingPlaceWithSnagData } from '$lib/dataProvider';
   import { isElectoralDivision, type SelectionAttributes } from '../../../types/attributes';
 
   interface Props {
@@ -6,18 +7,42 @@
   }
 
   let { attributes: item }: Props = $props();
+
+  const loadLocationData = async () => {
+    if (isElectoralDivision(item)) {
+      const divisionDataRequest = await fetch(`/api/divisions?divisionName=${item.elect_div}`);
+      const divisionDataText = await divisionDataRequest.text();
+      const divisionData = JSON.parse(divisionDataText) as DivsionWithMemberAndCandidates;
+      console.log('divisionData', divisionData);
+      return divisionData;
+    } else {
+      const pollingPlaceDataRequest = await fetch(`/api/polling-places?pollingPlaceId=${item.PollingPlaceID}`);
+      const pollingPlaceDataText = await pollingPlaceDataRequest.text();
+      const pollingPlaceData = JSON.parse(pollingPlaceDataText) as PollingPlaceWithSnagData;
+      console.log('polingPlaceData', pollingPlaceData);
+      return pollingPlaceData;
+    }
+  }
+
+  const locationDataPromise = loadLocationData();
 </script>
 
 <div class="p-4">
-  {#if isElectoralDivision(item)}
-    <h1 class="text-xl font-bold">{item.elect_div}</h1>
-    <p>{item.objectid}</p>
-  {:else}
-    <h1 class="text-xl font-bold">{item.DivisionNm}</h1>
-    <h3 class="">{item.PremisesAddress1}, {item.PremisesSuburb} {item.PremisesPostCode}</h3>
+  {#await locationDataPromise}
+    <p>Loading...</p>
+  {:then apiData}
+    {#if isAPIDivision(apiData)}
+      <h1 class="text-xl font-bold">{apiData.name}</h1>
+      <p>{apiData.currentMember.party}</p>
+    {:else}
+      <h1 class="text-xl font-bold">{apiData.name}</h1>
+      <h3 class="">{apiData.address1}, {apiData.suburb} {apiData.postCode}</h3>
 
-    <h1>SNAGS</h1>
-  {/if}
+      <h1>SNAGS: {apiData.snagData && apiData.snagData.votePercent}%</h1>
+    {/if}
+  {:catch error}
+    <p style="color: red">{error.message}</p>
+  {/await}
 </div>
 
 <style>

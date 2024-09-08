@@ -69,6 +69,14 @@ export type PollingPlaceWithSnagData = PollingPlace & {
   };
 };
 
+export type APIDataItem = DivsionWithMemberAndCandidates | PollingPlaceWithSnagData;
+
+export const isAPIDivision = (attr: APIDataItem): attr is DivsionWithMemberAndCandidates =>
+  'currentMember' in attr;
+
+export const isAPIPollingPlace = (attr: APIDataItem): attr is PollingPlaceWithSnagData =>
+  'snagData' in attr;
+
 export type Candidate = {
   surname: string;
   givenName: string;
