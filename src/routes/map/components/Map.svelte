@@ -37,8 +37,7 @@
 
         const graphic = results.find(result => result.type === 'graphic');
         selectedAttributes = graphic?.graphic.attributes;
-        await loadLocationData();
-        openModal();
+        await loadLocationDataAndOpenModal();
       }
     });
 
@@ -49,9 +48,11 @@
     };
   }
 
-  const loadLocationData = async () => {
+  const loadLocationDataAndOpenModal = async () => {
     isLoadingApiData = true;
     apiData = null;
+
+    openModal();
 
     if (isElectoralDivision(selectedAttributes)) {
       const divisionDataRequest = await fetch(`/data/divisions?divisionName=${selectedAttributes.elect_div}`);
