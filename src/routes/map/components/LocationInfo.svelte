@@ -30,7 +30,7 @@
     }
 
     isLoadingApiData = false;
-  })
+  });
 </script>
 
 <div class="p-4">
