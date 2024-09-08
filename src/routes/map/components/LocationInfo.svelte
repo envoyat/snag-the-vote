@@ -1,5 +1,6 @@
 <script lang="ts">
   import { isAPIDivision, type APIDataItem, type DivsionWithMemberAndCandidates, type PollingPlaceWithSnagData } from '$lib/dataProvider';
+  import { onMount } from 'svelte';
   import { isElectoralDivision, type SelectionAttributes } from '../../../types/attributes';
 
   interface Props {
@@ -8,29 +9,34 @@
 
   let { attributes: item }: Props = $props();
 
-  const loadLocationData = async () => {
+  let isLoadingApiData = $state(false);
+  let apiData: APIDataItem = $state({}) as APIDataItem;
+
+  onMount(async () => {
+    isLoadingApiData = true;
+
     if (isElectoralDivision(item)) {
       const divisionDataRequest = await fetch(`/api/divisions?divisionName=${item.elect_div}`);
       const divisionDataText = await divisionDataRequest.text();
       const divisionData = JSON.parse(divisionDataText) as DivsionWithMemberAndCandidates;
       console.log('divisionData', divisionData);
-      return divisionData;
+      apiData = divisionData;
     } else {
       const pollingPlaceDataRequest = await fetch(`/api/polling-places?pollingPlaceId=${item.PollingPlaceID}`);
       const pollingPlaceDataText = await pollingPlaceDataRequest.text();
       const pollingPlaceData = JSON.parse(pollingPlaceDataText) as PollingPlaceWithSnagData;
       console.log('polingPlaceData', pollingPlaceData);
-      return pollingPlaceData;
+      apiData = pollingPlaceData;
     }
-  }
 
-  const locationDataPromise = loadLocationData();
+    isLoadingApiData = false;
+  })
 </script>
 
 <div class="p-4">
-  {#await locationDataPromise}
+  {#if isLoadingApiData}
     <p>Loading...</p>
-  {:then apiData}
+  {:else}
     {#if isAPIDivision(apiData)}
       <h1 class="text-xl font-bold">{apiData.name}</h1>
       <p>{apiData.currentMember.party}</p>
@@ -40,9 +46,7 @@
 
       <h1>SNAGS: {apiData.snagData && apiData.snagData.votePercent}%</h1>
     {/if}
-  {:catch error}
-    <p style="color: red">{error.message}</p>
-  {/await}
+  {/if}
 </div>
 
 <style>
