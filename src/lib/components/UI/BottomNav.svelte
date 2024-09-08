@@ -4,8 +4,8 @@
   const matchRoute = (path: string): boolean => $page.url.pathname === path;
 </script>
 
-<div class="btm-nav btm-nav-sm">
-  <a href="/" class:active={matchRoute('/')}>
+<div data-theme="snags" class="btm-nav btm-nav-md bg-primary">
+  <a href="/" class:bg-secondary={matchRoute('/')}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-5 w-5"
@@ -20,7 +20,7 @@
     </svg>
     <span class="btm-nav-label">Home</span>
   </a>
-  <a href="/map" class:active={matchRoute('/map')}>
+  <a href="/map" class:bg-secondary={matchRoute('/map')}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-5 w-5"
@@ -35,7 +35,7 @@
     </svg>
     <span class="btm-nav-label">Map</span>
   </a>
-  <a href="/stats" class:active={matchRoute('/stats')}>
+  <a href="/stats" class:bg-secondary={matchRoute('/stats')}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-5 w-5"

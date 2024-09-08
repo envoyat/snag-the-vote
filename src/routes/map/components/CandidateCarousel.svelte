@@ -1,9 +1,13 @@
 <script lang="ts">
-  import { slide } from 'svelte/transition';
   import { type Candidate, type DivisionWithMemberAndCandidates } from '../../../types/apiData';
 
   const images = [
-    'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=640'
+    'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1568585105565-e372998a195d?q=80&w=640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?q=80&w=640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=640&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   ]
 
   interface Props {
@@ -17,7 +21,7 @@
 
   const getFullName = (candidate: Candidate) => `${candidate.givenName} ${candidate.surname}`;
   const getDivisionParty = (candidate: Candidate) => `${candidate.party} - ${candidate.divisionName}`;
-
+  const getRandomImage = () => images[Math.floor(Math.random() * images.length)];
   const getPartyStyle = (party: string) => {
     const blue = 'border-blue-800';
     const colours: Record<string, string> = {
@@ -39,12 +43,12 @@
 </script>
 
 <div class="carousel-container">
-  <div transition:slide class="carousel carousel-center rounded-box h-32">
+  <div class="carousel rounded-box h-32">
     {#each candidates as candidate}
       <div class="carousel-item w-80 p-1 border-y-4 {`${getPartyStyle(candidate.party)}`}">
         <div class="avatar">
           <div class="rounded w-32">
-            <img src={images[0]} alt="{getFullName(candidate)} of {getDivisionParty(candidate)}" />
+            <img src={getRandomImage()} alt="{getFullName(candidate)} of {getDivisionParty(candidate)}" />
           </div>
         </div>
         <div class="prose p-2">

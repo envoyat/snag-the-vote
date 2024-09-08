@@ -2,7 +2,7 @@
 
 </script>
 
-<div class="navbar bg-base-100 border-b-2 sticky">
+<div data-theme="snags" class="navbar border-b-2 border-secondary sticky bg-primary text-white">
   <div class="navbar-start">
     <div class="dropdown">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -28,7 +28,7 @@
   </div>
 
   <div class="navbar-center">
-    <a href="/" class="btn btn-ghost text-xl">Snag the vote!</a>
+    <a href="/" class="btn btn-ghost text-4xl">Snag the Vote</a>
   </div>
 
   <div class="navbar-end">
